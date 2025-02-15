@@ -1,0 +1,221 @@
+/* Глобальные стили для html и body */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9e7; /* пастельно-бежевый фон */
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* Шапка (header) */
+header {
+    background-color: #e0d8c3;
+    padding: 20px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Левая часть меню */
+.left-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 100px;
+    margin-right: auto;
+}
+
+/* Правая часть меню */
+.right-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #555;
+    transform: scale(1.05);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Основной контент (main) */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Контейнер для выравнивания содержимого */
+.container {
+    max-width: 600px; /* ограничиваем ширину формы */
+    margin: 0 auto;   /* выравниваем по центру */
+}
+
+/* Футер (footer) */
+footer {
+    background-color: #e0d8c3;
+    padding: 20px 0;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Контейнер в футере */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.footer-col h3 {
+    margin-top: 0;
+}
+
+.footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin: 5px 0;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-col ul li a:hover {
+    color: #555;
+}
+
+/* Блок подписки */
+.subscribe-block {
+    margin-top: 10px;
+}
+
+.subscribe-block input {
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.subscribe-block button {
+    padding: 6px 12px;
+    background-color: #d2b48c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-block button:hover {
+    background-color: #c19a6b;
+}
+
+/* Общий класс для кнопок */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d2b48c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #c19a6b;
+}
+
+/* Форма */
+form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.flashes {
+    list-style: none;
+    padding: 0;
+}
+
+.flashes .success {
+    color: green;
+}
+
+.flashes .error {
+    color: red;
+}

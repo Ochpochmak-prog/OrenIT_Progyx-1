@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Книга Памяти{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<header>
+    <nav>
+      <ul class="left-menu">
+        <li><a href="{{ url_for('index') }}">Главная</a></li>
+        <li><a href="{{ url_for('about') }}">О Проекте</a></li>
+        <li><a href="{{ url_for('map_view') }}">Карта</a></li>
+      </ul>
+      <ul class="right-menu">
+        {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('logout') }}">Выйти</a></li>
+        {% else %}
+          <li><a href="{{ url_for('register') }}">Регистрация</a></li>
+          <li><a href="{{ url_for('login') }}">Вход</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+</header>
+<hr>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<main>
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</main>
+
+<footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>О Книге Памяти</h3>
+        <ul>
+          <li><a href="{{ url_for('about') }}">Цели и задачи</a></li>
+          <li><a href="{{ url_for('legal_docs') }}">Нормативные документы</a></li>
+          <li><a href="{{ url_for('faq') }}">Частые вопросы</a></li>
+          <li><a href="{{ url_for('contacts') }}">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Сведения</h3>
+        <ul>
+          <li><a href="{{ url_for('all_records') }}">Все записи</a></li>
+          <li><a href="#">Поиск по фамилии</a></li>
+          <li><a href="{{ url_for('municipalities') }}">Муниципальные образования</a></li>
+          <li><a href="#">Фильтрация по конфликтам</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Контакты</h3>
+        <p><strong>0-000-00-00-00</strong> (с 10:00 до 22:00)</p>
+        <p>Оренбургская область</p>
+        <div class="subscribe-block">
+          <input type="email" placeholder="Введите email, чтобы получать новости">
+          <button>Подписаться</button>
+        </div>
+      </div>
+    </div>
+</footer>
+</body>
+</html>
