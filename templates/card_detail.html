@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  .card-detail {
+    background-image: url('{{ url_for("static", filename="images/background.jpg") }}');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: #000;
+  }
+  .card-detail img.card-photo {
+    max-width: 250px;
+    display: block;
+    margin-bottom: 20px;
+  }
+  .card-detail h3, .card-detail p {
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="container">
+  <h2>Детали карточки</h2>
+  <div class="card-detail">
+    {% if record.photo_path %}
+  {% if record.photo_path[0] != '/' %}
+    <img src="/{{ record.photo_path }}" alt="Фото" class="card-photo">
+  {% else %}
+    <img src="{{ record.photo_path }}" alt="Фото" class="card-photo">
+  {% endif %}
+{% else %}
+  <img src="{{ url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" class="card-photo">
+{% endif %}
+    <h3>{{ record.full_name }}</h3>
+    <p><strong>Дата рождения:</strong> {{ record.birth_date }}</p>
+    <p><strong>Дата смерти:</strong> {{ record.death_date }}</p>
+    <p><strong>Описание:</strong> {{ record.description }}</p>
+    <p><strong>Место захоронения:</strong> {{ record.burial_place }}</p>
+    <p><strong>Награды:</strong>
+      {% if record.awards %}
+        {{ record.awards }}
+      {% else %}
+        Не указано
+      {% endif %}
+    </p>
+    <p><strong>Участие в военных событиях:</strong> {{ record.military_service }}</p>
+  </div>
+</div>
+{% endblock %}

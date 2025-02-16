@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Панель Администратора{% endblock %}</title>
+  <!-- Подключаем свой CSS для админки -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+  <header class="admin-header">
+    <h1>Панель Администратора</h1>
+    <nav class="admin-top-nav">
+      <!-- Быстрая ссылка на выход (поменяйте на нужный роут) -->
+      <a href="{{ url_for('logout') }}">Выйти</a>
+    </nav>
+  </header>
+
+  <div class="admin-container">
+    <!-- Боковое меню -->
+    <aside class="admin-sidebar">
+      <ul>
+        <li><a href="{{ url_for('admin_dashboard') }}">Главная</a></li>
+        <li><a href="{{ url_for('manage_records') }}">Управление записями</a></li>
+        <li><a href="{{ url_for('manage_users') }}">Пользователи</a></li>
+        <li><a href="{{ url_for('view_logs') }}">Журнал действий</a></li>
+        <li><a href="{{ url_for('create_admin') }}">Добавить администратора</a></li>
+      </ul>
+    </aside>
+
+    <!-- Основная область контента -->
+    <main class="admin-content">
+      <!-- Блок для «хлебных крошек» (breadcrumb), если нужно -->
+      <div class="admin-breadcrumb">
+        {% block breadcrumb %}{% endblock %}
+      </div>
+
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

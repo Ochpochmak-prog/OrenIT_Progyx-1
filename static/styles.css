@@ -1,0 +1,437 @@
+/* =========================
+   Глобальные стили для html и body
+   ========================= */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9e7; /* пастельно-бежевый фон */
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   Шапка (header)
+   ========================= */
+header {
+    background-color: #e0d8c3;
+    padding: 20px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Левая часть меню */
+.left-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 100px;
+    margin-right: auto;
+}
+
+/* Правая часть меню */
+.right-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #555;
+    transform: scale(1.05);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* =========================
+   Основной контент (main)
+   ========================= */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Контейнер для выравнивания содержимого (используется, например, в формах) */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* =========================
+   Футер (footer)
+   ========================= */
+footer {
+    background-color: #e0d8c3;
+    padding: 20px 0;
+    border-radius: 15px;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.footer-col h3 {
+    margin-top: 0;
+}
+
+.footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin: 5px 0;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-col ul li a:hover {
+    color: #555;
+}
+
+/* Блок подписки */
+.subscribe-block {
+    margin-top: 10px;
+}
+
+.subscribe-block input {
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.subscribe-block button {
+    padding: 6px 12px;
+    background-color: #d2b48c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-block button:hover {
+    background-color: #c19a6b;
+}
+
+/* =========================
+   Кнопки
+   ========================= */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d2b48c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #c19a6b;
+}
+
+.btn-user-send {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d2b48c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-right: 10.1rem;
+    width: 90%;
+}
+
+.p-send{
+    margin-left: 3%;
+}
+
+.btn-user-send: hover {
+    background-color: #c19a6b;
+}
+
+/* =========================
+   Формы, поля
+   ========================= */
+form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Стили faq */
+
+.h1-faq {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.faq-container {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    margin-bottom: 24px;
+    background-color: #f4f4ec;
+    align-items: center;
+    padding-top: 8px;
+    border-radius: 12px;
+    border-left: 5px;
+}
+
+.question {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    padding-left: 27px;
+}
+
+.question::before {
+    content: "+";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    padding: 12px 0;
+    margin-left: 32px;
+}
+
+.answer.show {
+    max-height: 100vh;
+    opacity: 1;
+    padding: 12px 10;
+}
+
+.question.open::before {
+    content: "-";
+    transform: rotate(45deg);
+}
+
+/* =========================
+   Всплывающие сообщения
+   ========================= */
+.flashes {
+    list-style: none;
+    padding: 0;
+}
+
+.flashes .success {
+    color: green;
+}
+
+.flashes .error {
+    color: red;
+}
+
+/* =========================
+   Страница с картой (Full-Width Map Page)
+   ========================= */
+
+/* Родительский контейнер для карты, растянутый на всю ширину */
+.map-page-container {
+  display: grid;
+  grid-template-columns: 12.5% 75% 12.5%;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Левая колонка (12.5%) */
+.left-cards {
+  background-color: #f9f9f9;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+/* Центральная колонка (75%) */
+.map-center {
+  background-color: #ffffff;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+/* Правая колонка (12.5%) */
+.right-cards {
+  background-color: #f9f9f9;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+/* Блок самой карты */
+.map-block {
+  width: 100%;
+  height: 500px;
+  background-color: #ccc; /* Заглушка под карту */
+}
+
+/* =========================
+   Оформление карточек
+   ========================= */
+.mem-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.card-photo {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 5px;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.mem-card {
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.mem-card:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.card-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+<style>
+  /* Контейнер фиксируется в правом верхнем углу */
+  #flash-messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 300px;
+  }
+
+  /* Стили для сообщения */
+  .flash-message {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+  }
+
+  /* Оформление для разных категорий сообщений */
+  .flash-message.success {
+    border-color: green;
+  }
+  .flash-message.error {
+    border-color: red;
+  }
+  .flash-message.info {
+    border-color: blue;
+  }
+</style>

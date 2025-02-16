@@ -1,0 +1,48 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ 'Создать' if action == 'create' else 'Редактировать' }} запись{% endblock %}
+{% block breadcrumb %}{{ 'Создать' if action == 'create' else 'Редактировать' }} запись{% endblock %}
+{% block content %}
+<h2>{{ 'Создать новую' if action == 'create' else 'Редактировать' }} запись</h2>
+<form method="POST" enctype="multipart/form-data">
+  <label for="full_name">ФИО:</label><br>
+  <input type="text" id="full_name" name="full_name" value="{{ record.full_name if record else '' }}" required><br><br>
+
+  <label for="birth_date">Дата рождения:</label><br>
+  <input type="text" id="birth_date" name="birth_date" value="{{ record.birth_date if record else '' }}"><br><br>
+
+  <label for="death_date">Дата смерти:</label><br>
+  <input type="text" id="death_date" name="death_date" value="{{ record.death_date if record else '' }}"><br><br>
+
+  <label for="description">Описание:</label><br>
+  <textarea id="description" name="description" rows="4" cols="50">{{ record.description if record else '' }}</textarea><br><br>
+
+  <label for="burial_place">Место захоронения:</label><br>
+  <input type="text" id="burial_place" name="burial_place" value="{{ record.burial_place if record else '' }}"><br><br>
+
+  <label for="awards">Награды (через запятую):</label><br>
+  <input type="text" id="awards" name="awards" value="{{ record.awards if record else '' }}"><br><br>
+
+  <label for="military_service">Участие в военных событиях:</label><br>
+  <select id="military_service" name="military_service" required>
+    <option value="">Выберите вариант</option>
+    <option value="Великая отечественная война" {% if record and record.military_service == "Великая отечественная война" %}selected{% endif %}>Великая отечественная война</option>
+    <option value="Боевые действия в Афганистане" {% if record and record.military_service == "Боевые действия в Афганистане" %}selected{% endif %}>Боевые действия в Афганистане</option>
+    <option value="Вооруженный конфликт в Чеченской Республике и на прилегающих к ней территориях Российской Федерации" {% if record and record.military_service == "Вооруженный конфликт в Чеченской Республике и на прилегающих к ней территориях Российской Федерации" %}selected{% endif %}>
+      Вооруженный конфликт в Чеченской Республике и на прилегающих к ней территориях Российской Федерации
+    </option>
+    <option value="Выполнение специальных задач на территории Сирийской Арабской Республики" {% if record and record.military_service == "Выполнение специальных задач на территории Сирийской Арабской Республики" %}selected{% endif %}>
+      Выполнение специальных задач на территории Сирийской Арабской Республики
+    </option>
+    <option value="Выполнение специальных задач на территории Таджикистана, Ингушетии, в Грузино-Абхазских событиях" {% if record and record.military_service == "Выполнение специальных задач на территории Таджикистана, Ингушетии, в Грузино-Абхазских событиях" %}selected{% endif %}>
+      Выполнение специальных задач на территории Таджикистана, Ингушетии, в Грузино-Абхазских событиях
+    </option>
+    <option value="Специальная военная операция на Украине" {% if record and record.military_service == "Специальная военная операция на Украине" %}selected{% endif %}>Специальная военная операция на Украине</option>
+  </select><br><br>
+
+  <label for="photo">Фото:</label><br>
+  <input type="file" id="photo" name="photo"><br><br>
+
+  <button type="submit">{{ 'Создать' if action == 'create' else 'Сохранить' }}</button>
+  <a href="{{ url_for('manage_records') }}">Отмена</a>
+</form>
+{% endblock %}

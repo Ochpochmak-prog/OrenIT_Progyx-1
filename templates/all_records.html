@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Все записи{% endblock %}
+
+{% block content %}
+<h1>Все записи</h1>
+
+<!-- Форма поиска по ФИО -->
+<form method="GET" action="{{ url_for('all_records') }}">
+  <input type="text" name="name" placeholder="Поиск по ФИО" value="{{ name_query }}">
+  <button type="submit">Искать</button>
+</form>
+
+<div class="records-list">
+  {% if records %}
+    {% for record in records %}
+      <div class="record-item">
+         {% if record.photo_path %}
+            <img src="{{ record.photo_path }}" alt="Фото {{ record.full_name }}" width="150" class="img-records">
+         {% else %}
+            <img src="{{ url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" width="150">
+         {% endif %}
+         <h3>{{ record.full_name }}</h3>
+         <p>Дата рождения: {{ record.birth_date }}</p>
+         <p>Дата смерти: {{ record.death_date }}</p>
+         <p>{{ record.description[:100] }}{% if record.description|length > 100 %}...{% endif %}</p>
+         <a href="{{ url_for('card_detail', record_id=record.id) }}">Подробнее</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Записей не найдено.</p>
+  {% endif %}
+</div>
+{% endblock %}

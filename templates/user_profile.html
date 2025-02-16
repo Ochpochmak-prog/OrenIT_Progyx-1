@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+<h1>Личный кабинет {{ user.first_name }}</h1>
+
+<!-- ФОРМА ОБНОВЛЕНИЯ ПРОФИЛЯ -->
+<h2>Обновление данных</h2>
+<form method="POST">
+  {{ update_form.hidden_tag() }}
+
+  <div class="form-group">
+    {{ update_form.first_name.label }}
+    {{ update_form.first_name(class="form-control", value=user.first_name) }}
+    {% if update_form.first_name.errors %}
+      <small class="error">
+        {% for error in update_form.first_name.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ update_form.middle_name.label }}
+    {{ update_form.middle_name(class="form-control", value=user.middle_name) }}
+    {% if update_form.middle_name.errors %}
+      <small class="error">
+        {% for error in update_form.middle_name.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ update_form.last_name.label }}
+    {{ update_form.last_name(class="form-control", value=user.last_name) }}
+    {% if update_form.last_name.errors %}
+      <small class="error">
+        {% for error in update_form.last_name.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ update_form.email.label }}
+    {{ update_form.email(class="form-control", value=user.email) }}
+    {% if update_form.email.errors %}
+      <small class="error">
+        {% for error in update_form.email.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ update_form.phone.label }}
+    {{ update_form.phone(class="form-control", value=user.phone) }}
+    {% if update_form.phone.errors %}
+      <small class="error">
+        {% for error in update_form.phone.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  {{ update_form.submit(class="btn") }}
+</form>
+
+
+<!-- ФОРМА СМЕНЫ ПАРОЛЯ -->
+<hr>
+<h2>Сменить пароль</h2>
+<form method="POST" action="{{ url_for('change_password') }}">
+  {{ pass_form.hidden_tag() }}
+
+  <div class="form-group">
+    {{ pass_form.current_password.label }}
+    {{ pass_form.current_password(class="form-control") }}
+    {% if pass_form.current_password.errors %}
+      <small class="error">
+        {% for error in pass_form.current_password.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ pass_form.new_password.label }}
+    {{ pass_form.new_password(class="form-control") }}
+    {% if pass_form.new_password.errors %}
+      <small class="error">
+        {% for error in pass_form.new_password.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    {{ pass_form.confirm_new_password.label }}
+    {{ pass_form.confirm_new_password(class="form-control") }}
+    {% if pass_form.confirm_new_password.errors %}
+      <small class="error">
+        {% for error in pass_form.confirm_new_password.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+
+  {{ pass_form.submit(class="btn") }}
+</form>
+<p class="p-send">
+  <a href="{{ url_for('create_user_record') }}" class="btn-user-send">
+    Создать заявку на карточку
+  </a>
+</p>
+{% endblock %}

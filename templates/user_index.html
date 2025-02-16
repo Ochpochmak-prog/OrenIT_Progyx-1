@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Книга Памяти — Пользователь{% endblock %}
+
+{% block content %}
+<style>
+  /* Устанавливаем фон для страницы именно здесь */
+  body {
+    background: url("{{ url_for('static', filename='images/vajnoo.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Карточка в центре экрана */
+  .centered-box {
+    background-color: rgba(255, 255, 255, 0.85); /* полупрозрачный белый фон */
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  .centered-box h1 {
+    margin-top: 0;
+    font-size: 1.8em;
+  }
+
+  .centered-box p {
+    margin: 10px 0;
+  }
+
+  hr {
+    border: none;
+    margin: 0;
+  }
+</style>
+
+<!-- «Карточка» по центру экрана -->
+<div class="centered-box">
+  <h1>Добро пожаловать, {{ current_user.first_name if current_user.is_authenticated else "Гость" }}!</h1>
+  <p>Вы вошли как пользователь.</p>
+  <p>Здесь можно добавить пользовательский контент.</p>
+</div>
+{% endblock %}

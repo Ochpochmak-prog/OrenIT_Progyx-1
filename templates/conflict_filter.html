@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Поиск по конфликтам</h1>
+
+<!-- Форма отправляет GET-запрос на тот же маршрут /conflict_filter -->
+<form method="GET" action="{{ url_for('conflict_filter') }}" style="margin-bottom: 20px;">
+  <input type="text" name="q" placeholder="Введите название конфликта..."
+         value="{{ query_text }}"
+         style="padding: 5px; width: 200px;">
+  <button type="submit" style="padding: 5px 10px;">Поиск</button>
+</form>
+
+<!-- Отображаем карточки -->
+<div class="cards-container">
+  {% if records %}
+    {% for rec in records %}
+      <div class="mem-card">
+        <!-- Фото (если есть), или заглушка -->
+        <img src="{{ rec.photo_path or url_for('static', filename='images/default_photo.jpg') }}"
+             class="card-photo"
+             alt="Фото">
+
+        <!-- ФИО -->
+        <h3>{{ rec.full_name }}</h3>
+
+        <!-- Даты -->
+        {% if rec.birth_date or rec.death_date %}
+          <p>{{ rec.birth_date }} – {{ rec.death_date }}</p>
+        {% endif %}
+
+        <!-- Конфликт -->
+        {% if rec.conflict %}
+          <p><strong>Конфликт:</strong> {{ rec.conflict }}</p>
+        {% endif %}
+
+        <!-- Короткое описание -->
+        {% if rec.description %}
+          <p>{{ rec.description[0:100] }}...</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Ничего не найдено.</p>
+  {% endif %}
+</div>
+{% endblock %}

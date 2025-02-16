@@ -1,0 +1,49 @@
+{% extends "admin_base.html" %}
+{% block title %}Журнал действий{% endblock %}
+{% block breadcrumb %}Журнал действий{% endblock %}
+{% block content %}
+<h2>Журнал действий</h2>
+
+<!-- Можно добавить фильтр логов -->
+<form method="GET" style="margin-bottom: 20px;">
+  <label for="userFilter">Пользователь:</label>
+  <input type="text" id="userFilter" name="user" placeholder="email или имя">
+
+  <label for="actionFilter">Действие:</label>
+  <input type="text" id="actionFilter" name="action" placeholder="поиск по названию действия">
+
+  <button type="submit">Фильтр</button>
+</form>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Пользователь</th>
+    <th>Действие</th>
+    <th>IP-адрес</th>
+    <th>Браузер</th>
+    <th>Время</th>
+  </tr>
+</thead>
+<tbody>
+  {% for log in logs %}
+  <tr>
+    <td>{{ log.id }}</td>
+    <td>
+      {% if log.user %}
+        {{ log.user.email }}
+      {% else %}
+        (удалён)
+      {% endif %}
+    </td>
+    <td>{{ log.action }}</td>
+    <td>{{ log.ip_address }}</td>
+    <td>{{ log.user_agent }}</td>
+    <td>{{ log.timestamp }}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+
+</table>
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Галерея карточек{% endblock %}
+
+{% block content %}
+<style>
+  /* Обёртка на всю ширину */
+  .page-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Сетка карточек */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 2000px;
+    margin: 0 auto;  /* центрирование сетки */
+  }
+
+  .card {
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  /* Фиксированная область для фото: ширина 100% карточки, высота фиксирована */
+  .card img {
+    width: 100%;
+    height: 250px;            /* фиксированная высота для фото */
+    display: block;
+    margin: 0 auto 10px auto;
+    border-radius: 6px;
+    object-fit: scale-down;    /* если фото больше области – масштабируется, если меньше – оставляется как есть */
+    object-position: center;
+  }
+  .card h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.3em;
+  }
+  .card p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #555;
+  }
+
+  /* Пагинация */
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .pagination a, .pagination span {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .pagination a.active {
+    font-weight: bold;
+    background: #eee;
+  }
+  .pagination span {
+    background: #f8f8f8;
+  }
+
+  /* Стили для формы поиска */
+  .search-form {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .search-form input[type="text"] {
+    width: 500px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .search-form button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-left: 10px;
+    border: none;
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .search-form button:hover {
+    background-color: #286090;
+  }
+</style>
+
+<div class="page-wrapper">
+  <h1 style="text-align: center;">Галерея карточек</h1>
+
+  <!-- Форма поиска с datalist для выбора конфликта -->
+  <form class="search-form" method="GET" action="{{ url_for('cards_gallery') }}">
+    <input type="text" name="conflict" placeholder="Поиск по боевым действиям"
+           value="{{ conflict_query }}" list="conflictOptions">
+    <datalist id="conflictOptions">
+      <option value="Великая отечественная война">
+      <option value="Боевые действия в Афганистане">
+      <option value="Вооруженный конфликт в Чеченской Республике и на прилегающих к ней территориях Российской Федерации">
+      <option value="Выполнение специальных задач на территории Сирийской Арабской Республики">
+      <option value="Выполнение специальных задач на территории Таджикистана, Ингушетии, в Грузино-Абхазских событиях">
+      <option value="Специальная военная операция на Украине">
+    </datalist>
+    <button type="submit">Искать</button>
+  </form>
+
+  <div class="cards-grid">
+    {% for card in cards %}
+      <div class="card">
+        {% if card.photo_path %}
+          {% if card.photo_path[0] != '/' %}
+            <img src="/{{ card.photo_path }}" alt="Фото {{ card.full_name }}" class="card-photo">
+          {% else %}
+            <img src="{{ card.photo_path }}" alt="Фото {{ card.full_name }}" class="card-photo">
+          {% endif %}
+        {% else %}
+          <img src="{{ url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" class="card-photo">
+        {% endif %}
+        <h3>{{ card.full_name }}</h3>
+        <p>{{ card.military_service }}</p>
+        <a href="{{ url_for('card_detail', record_id=card.id) }}">Подробнее</a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Пагинация -->
+  <div class="pagination">
+    {% if pagination.has_prev %}
+      <a href="{{ url_for('cards_gallery', page=pagination.prev_num, conflict=conflict_query) }}">Предыдущая</a>
+    {% endif %}
+
+    {% for p in pagination.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=2) %}
+      {% if p %}
+        {% if p == pagination.page %}
+          <a href="{{ url_for('cards_gallery', page=p, conflict=conflict_query) }}" class="active">{{ p }}</a>
+        {% else %}
+          <a href="{{ url_for('cards_gallery', page=p, conflict=conflict_query) }}">{{ p }}</a>
+        {% endif %}
+      {% else %}
+        <span>…</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if pagination.has_next %}
+      <a href="{{ url_for('cards_gallery', page=pagination.next_num, conflict=conflict_query) }}">Следующая</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

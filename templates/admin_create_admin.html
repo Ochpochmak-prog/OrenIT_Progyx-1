@@ -1,0 +1,107 @@
+{% extends "admin_base.html" %}
+{% block title %}Добавить администратора{% endblock %}
+{% block breadcrumb %}Добавить администратора{% endblock %}
+{% block content %}
+<h2>Создать нового администратора</h2>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  
+  <div class="form-group">
+    {{ form.last_name.label }}<br>
+    {{ form.last_name(class="form-control") }}
+    {% if form.last_name.errors %}
+      <small class="error">
+        {% for error in form.last_name.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.first_name.label }}<br>
+    {{ form.first_name(class="form-control") }}
+    {% if form.first_name.errors %}
+      <small class="error">
+        {% for error in form.first_name.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.middle_name.label }}<br>
+    {{ form.middle_name(class="form-control") }}
+    {% if form.middle_name.errors %}
+      <small class="error">
+        {% for error in form.middle_name.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.birth_date.label }}<br>
+    {{ form.birth_date(class="form-control") }}
+    {% if form.birth_date.errors %}
+      <small class="error">
+        {% for error in form.birth_date.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.position.label }}<br>
+    {{ form.position(class="form-control") }}
+    {% if form.position.errors %}
+      <small class="error">
+        {% for error in form.position.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.email.label }}<br>
+    {{ form.email(class="form-control") }}
+    {% if form.email.errors %}
+      <small class="error">
+        {% for error in form.email.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.password.label }}<br>
+    {{ form.password(class="form-control") }}
+    {% if form.password.errors %}
+      <small class="error">
+        {% for error in form.password.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <div class="form-group">
+    {{ form.confirm_password.label }}<br>
+    {{ form.confirm_password(class="form-control") }}
+    {% if form.confirm_password.errors %}
+      <small class="error">
+        {% for error in form.confirm_password.errors %}
+          {{ error }}<br>
+        {% endfor %}
+      </small>
+    {% endif %}
+  </div>
+  
+  <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button>
+</form>
+{% endblock %}

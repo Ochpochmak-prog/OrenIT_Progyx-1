@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+  /* Контейнер занимает всю ширину */
+  .container {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+  }
+  /* Структура страницы с картой */
+  .map-page-container {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+      min-height: 600px;
+  }
+  .left-cards, .right-cards {
+      width: 12.5%;
+      box-sizing: border-box;
+      padding: 10px;
+      overflow-y: auto;
+  }
+  .map-center {
+      width: 75%;
+      box-sizing: border-box;
+      padding: 10px;
+      position: relative;
+  }
+  /* Стили карточек-превью – фиксированная высота для одинакового размера */
+  .mem-card {
+    box-sizing: border-box;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #000;
+  }
+  .mem-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .mem-card h3, .mem-card p {
+    margin: 5px 0;
+  }
+  /* Стили для блока с картой */
+  .map-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    border: none;
+  }
+  .map-block iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<div class="map-page-container">
+  <!-- Левая колонка -->
+  <div class="left-cards">
+    {% if left_card %}
+      <a href="{{ url_for('card_detail', record_id=left_card.id) }}" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="mem-card" style="background-image: url('{{ url_for('static', filename='images/background.jpg') }}');">
+          {% if left_card.photo_path %}
+            <img src="{{ left_card.photo_path }}" alt="Фото" class="card-photo">
+          {% else %}
+            <img src="{{ url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" class="card-photo">
+          {% endif %}
+          <h3>{{ left_card.full_name }}</h3>
+          <p><strong>Дата рождения:</strong> {{ left_card.birth_date }}</p>
+          <p><strong>Дата смерти:</strong> {{ left_card.death_date }}</p>
+          <p><strong>Описание:</strong> {{ left_card.description[:100] }}...</p>
+          <p><strong>Место захоронения:</strong> {{ left_card.burial_place }}</p>
+          <p><strong>Награды:</strong>
+            {% if left_card.awards %}
+              {% if left_card.awards is iterable and left_card.awards is not string %}
+                {{ left_card.awards | join(', ') }}
+              {% else %}
+                {{ left_card.awards }}
+              {% endif %}
+            {% else %}
+              Не указано
+            {% endif %}
+          </p>
+          <p><strong>Военное участие:</strong> {{ left_card.military_service }}</p>
+        </div>
+      </a>
+    {% else %}
+      <p>Нет карточки для отображения</p>
+    {% endif %}
+  </div>
+
+  <!-- Центральная колонка с картой -->
+  <div class="map-center">
+    <h2>Интерактивная карта</h2>
+    <div class="map-block">
+      <iframe src="https://geois2.orb.ru/resource/8599/display/tiny?base=basemap_0&lon=56.0525&lat=52.3898&angle=0&zoom=10&styles=8923%2C7986%2C7975%2C2092&linkMainMap=true&events=true&panel=layers&controls=id%2Ctv%2Cma%2Cmd%2Csl%2Cie%2Czo%2Cml%2Czi%2Cis&panels=identify%2Clayers%2Csearch"></iframe>
+    </div>
+  </div>
+
+  <!-- Правая колонка -->
+  <div class="right-cards">
+    {% if right_card %}
+      <a href="{{ url_for('card_detail', record_id=right_card.id) }}" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="mem-card" style="background-image: url('{{ url_for('static', filename='images/background.jpg') }}');">
+          {% if right_card.photo_path %}
+            <img src="{{ right_card.photo_path }}" alt="Фото" class="card-photo">
+          {% else %}
+            <img src="{{ url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" class="card-photo">
+          {% endif %}
+          <h3>{{ right_card.full_name }}</h3>
+          <p><strong>Дата рождения:</strong> {{ right_card.birth_date }}</p>
+          <p><strong>Дата смерти:</strong> {{ right_card.death_date }}</p>
+          <p><strong>Описание:</strong> {{ right_card.description[:100] }}...</p>
+          <p><strong>Место захоронения:</strong> {{ right_card.burial_place }}</p>
+          <p><strong>Награды:</strong>
+            {% if right_card.awards %}
+              {% if right_card.awards is iterable and right_card.awards is not string %}
+                {{ right_card.awards | join(', ') }}
+              {% else %}
+                {{ right_card.awards }}
+              {% endif %}
+            {% else %}
+              Не указано
+            {% endif %}
+          </p>
+          <p><strong>Военное участие:</strong> {{ right_card.military_service }}</p>
+        </div>
+      </a>
+    {% else %}
+      <p>Нет карточки для отображения</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

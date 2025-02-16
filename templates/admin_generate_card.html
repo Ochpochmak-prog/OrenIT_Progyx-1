@@ -1,0 +1,12 @@
+{% extends "admin_base.html" %}
+{% block title %}Готовая карточка{% endblock %}
+{% block breadcrumb %}Готовая карточка{% endblock %}
+{% block content %}
+<h2>Результат генерации мемориальной карточки</h2>
+<p>Ниже отображается сгенерированная карточка:</p>
+<img src="{{ url_for('static', filename='cards/' ~ filename) }}" alt="Мемориальная карточка">
+<p>
+  <a href="{{ url_for('static', filename='cards/' ~ filename) }}" download>Скачать</a> |
+  <a href="{{ url_for('manage_records') }}">Вернуться к списку записей</a>
+</p>
+{% endblock %}
