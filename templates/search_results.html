@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Результаты поиска</h2>
+
+<form method="GET" action="{{ url_for('search_cards') }}">
+  <input type="text" name="name" placeholder="ФИО"
+         value="{{ name_query }}">
+  <input type="text" name="conflict" placeholder="Конфликт"
+         value="{{ conflict_query }}">
+  <button type="submit">Искать</button>
+</form>
+
+{% if results %}
+  {% for rec in results %}
+    <div class="mem-card">
+      <img src="{{ rec.photo_path or url_for('static', filename='images/default_photo.jpg') }}"
+           alt="Фото"
+           class="card-photo">
+      <h3>{{ rec.full_name }}</h3>
+      <p>Конфликт: {{ rec.conflict }}</p>
+      <p>{{ rec.description[0:200] }}...</p>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>Ничего не найдено.</p>
+{% endif %}
+{% endblock %}

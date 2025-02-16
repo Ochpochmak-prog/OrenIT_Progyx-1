@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Создание заявки{% endblock %}
+
+{% block content %}
+<h2>Создать заявку на карточку</h2>
+
+<form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="full_name">ФИО</label>
+    <input type="text" name="full_name" id="full_name" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label for="birth_date">Дата рождения</label>
+    <input type="text" name="birth_date" id="birth_date" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="death_date">Дата смерти</label>
+    <input type="text" name="death_date" id="death_date" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="description">Описание</label>
+    <textarea name="description" id="description" class="form-control"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="burial_place">Место захоронения</label>
+    <input type="text" name="burial_place" id="burial_place" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="awards">Награды (через запятую)</label>
+    <input type="text" name="awards" id="awards" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="military_service">Участие в военных событиях</label>
+    <textarea name="military_service" id="military_service" class="form-control"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="photo">Фото</label>
+    <input type="file" name="photo" id="photo" class="form-control">
+  </div>
+
+  <button type="submit" class="btn">Отправить заявку</button>
+</form>
+{% endblock %}

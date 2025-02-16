@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="img-back">
+    <h1 class="h1-faq">Часто задаваемые вопросы</h1>
+
+    <ul class="faq-container">
+        <li class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">Какая погода сегодня?</div>
+            <div class="answer">Сегодня солнечно и тепло.</div>
+        </li>
+
+        <li class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">Какой ваш любимый цвет?</div>
+            <div class="answer">Мой любимый цвет — синий.</div>
+        </li>
+
+        <li class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">Что такое Lorem Ipsum?</div>
+            <div class="answer">Lorem Ipsum — это просто фиктивный текст, используемый в полиграфии и веб-дизайне.</div>
+        </li>
+
+
+    <li class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">Что такое Lorem Ipsum?</div>
+            <div class="answer">Lorem Ipsum — это просто фиктивный текст, используемый в полиграфии и веб-дизайне.</div>
+        </li>
+
+
+    <li class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">Что такое Lorem Ipsum?</div>
+            <div class="answer">Lorem Ipsum — это просто фиктивный текст, используемый в полиграфии и веб-дизайне.</div>
+        </li>
+
+
+    <li class="faq-item">
+            <div class="question" onclick="toggleAnswer(this)">Что такое Lorem Ipsum?</div>
+            <div class="answer">Lorem Ipsum — это просто фиктивный текст, используемый в полиграфии и веб-дизайне.</div>
+        </li>
+
+    </ul>
+    </div>
+
+
+    <script>
+        function toggleAnswer(questionElement) {
+            // Находим следующий элемент после вопроса (это будет ответ)
+            const answerElement = questionElement.nextElementSibling;
+
+            // Меняем класс ответа на show, если он скрыт, и обратно
+            if (answerElement.classList.contains('show')) {
+                answerElement.classList.remove('show');
+                questionElement.classList.remove('open');
+            } else {
+                answerElement.classList.add('show');
+                questionElement.classList.add('open');
+            }
+        }
+    </script>
+{% endblock %}

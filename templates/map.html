@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>Интерактивная Карта</h1>
+
+<style>
+  /* Чтобы контейнер занимал всю ширину окна */
+  .container {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+  }
+
+  /* Колонка слева, справа и центр
+     (можно настроить, если нужна иная ширина) */
+  .map-page-container {
+      display: flex;           /* Flex-контейнер, чтобы колонки располагались в ряд */
+      flex-wrap: nowrap;       /* Не переносить колонки на следующую строку */
+      width: 100%;             /* Занимать всю доступную ширину */
+      min-height: 600px;       /* Примерная минимальная высота */
+  }
+
+  .left-cards, .right-cards {
+      width: 12.5%;
+      box-sizing: border-box;
+      padding: 10px;
+      overflow-y: auto;        /* Если карточки не влезают, появляется прокрутка */
+  }
+
+  .map-center {
+      width: 75%;
+      box-sizing: border-box;
+      padding: 10px;
+      position: relative;      /* Чтобы можно было «абсолютно» позиционировать карту внутри */
+  }
+
+  /* Карточки */
+  .mem-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .mem-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .mem-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+  }
+
+  /* Стили для блока с картой */
+  .map-block {
+    /* Занимаем всё пространство внутри .map-center */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    border: none;
+  }
+
+  /* Сам iframe растягиваем на 100% контейнера */
+  .map-block iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<div class="map-page-container">
+  <!-- Левая колонка -->
+  <div class="left-cards">
+    <h1 style="color:white;">.</h1>
+    {% if left_card %}
+      <a href="{{ url_for('card_detail', record_id=left_card.id) }}" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="mem-card">
+          <img src="{{ left_card.photo_path or url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" class="card-photo">
+          <h3>{{ left_card.full_name }}</h3>
+          {% if left_card.birth_date or left_card.death_date %}
+            <p>{{ left_card.birth_date }} – {{ left_card.death_date }}</p>
+          {% endif %}
+          <p>Участие в военных событиях: {{ left_card.military_service or 'Не указано' }}</p>
+          <p>{{ left_card.description[:100] }}...</p>
+        </div>
+      </a>
+    {% else %}
+      <p>Нет карточки для отображения</p>
+    {% endif %}
+  </div>
+
+  <!-- Центральная колонка с картой -->
+  <div class="map-center">
+    <h2>Интерактивная карта</h2>
+    <div class="map-block">
+      <!-- Убрали width/height и style у iframe -->
+      <iframe
+        src="https://geois2.orb.ru/resource/8599/display/tiny?base=basemap_0&lon=56.0525&lat=52.3898&angle=0&zoom=10&styles=8923%2C7986%2C7975%2C2092&linkMainMap=true&events=true&panel=layers&controls=id%2Ctv%2Cma%2Cmd%2Csl%2Cie%2Czo%2Cml%2Czi%2Cis&panels=identify%2Clayers%2Csearch">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Правая колонка -->
+  <div class="right-cards">
+    <h1 style="color:white;">.</h1>
+    {% if right_card %}
+      <a href="{{ url_for('card_detail', record_id=right_card.id) }}" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="mem-card">
+          <img src="{{ right_card.photo_path or url_for('static', filename='images/default_photo.jpg') }}" alt="Фото" class="card-photo">
+          <h3>{{ right_card.full_name }}</h3>
+          <p>Участие в военных событиях: {{ right_card.military_service or 'Не указано' }}</p>
+        </div>
+      </a>
+    {% else %}
+      <p>Нет карточки для отображения</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

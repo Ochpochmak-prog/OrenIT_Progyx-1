@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Детали карточки</h2>
+<div class="card-detail">
+  <img src="{{ record.photo_path or url_for('static', filename='images/default_photo.jpg') }}"
+       alt="Фото" class="card-photo">
+  <h3>{{ record.full_name }}</h3>
+  <p><strong>Дата рождения:</strong> {{ record.birth_date or 'Не указано' }}</p>
+  <p><strong>Дата смерти:</strong> {{ record.death_date or 'Не указано' }}</p>
+  <p><strong>Описание:</strong> {{ record.description or 'Нет описания' }}</p>
+  <p><strong>Место захоронения:</strong> {{ record.burial_place or 'Не указано' }}</p>
+  <p><strong>Награды:</strong> {{ record.awards or 'Не указано' }}</p>
+  <p><strong>Участие в военных событиях:</strong> {{ record.military_service or 'Не указано' }}</p>
+</div>
+{% endblock %}
